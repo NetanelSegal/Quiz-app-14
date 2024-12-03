@@ -1,5 +1,6 @@
 import Loader from './Loader/Loader';
 import useAxiosGet from '../hooks/useAxiosGet';
+import Error from './Error/Error';
 export default function CategoriesMenu({ setCategory }) {
   const {
     data: categories,
@@ -15,9 +16,7 @@ export default function CategoriesMenu({ setCategory }) {
       <h2 className="text-center font-semibold text-xl">Choose category</h2>
       <div className="flex flex-col gap-2 mt-4">
         {isLoading && <Loader />}
-        {error && (
-          <span className="bg-red-500 text-center rounded-full">{error}</span>
-        )}
+        {error && <Error message={error} />}
         {categories.length > 0 &&
           [{ name: 'Random', code: '' }, ...categories].map(
             ({ name, code }) => (
