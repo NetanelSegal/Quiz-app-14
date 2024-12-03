@@ -1,0 +1,11 @@
+GET http://localhost:3000 HTTP/1.1
+
+###
+
+GET http://localhost:3000/categoriesasdasd HTTP/1.1
+
+###
+
+GET http://localhost:3000/questions?cat=mongo HTTP/1.1
+
+###
