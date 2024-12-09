@@ -2,20 +2,17 @@ import { useState } from 'react';
 import { useQuizContext } from '../contexts/QuizContextProvider';
 
 export default function Question({ question, incrementQuestion }) {
-  const s = useQuizContext();
-
+  const { quizResult } = useQuizContext();
   const [selectedAnswer, setSelectedAnser] = useState(-1);
 
   const handleClick = (index) => {
     setSelectedAnser(index);
-    if (question.answer === index) {
-      console.log('Correct answer');
-    }
+    quizResult.current.push({ ...question, selectedAnswer: index });
   };
 
   return (
     <div className="py-2">
-      <h3 className="text-2xl min-h-24 ">{question.question}</h3>
+      <h3 className="text-2xl min-h-24">{question.question}</h3>
       <ul className="my-4 flex flex-col gap-2">
         {question.options.map((option, i) => (
           <li key={i} className="h-20">

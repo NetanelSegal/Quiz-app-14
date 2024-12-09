@@ -1,16 +1,23 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useRef, useState } from 'react';
 
 const QuizContext = createContext();
 
 export default function QuizContextProvider({ children }) {
   const [isQuizOver, setIsQuizOver] = useState(false);
+  const quizResult = useRef([]);
 
   const toggleIsQuizOver = () => {
     setIsQuizOver((prev) => !prev);
   };
 
   return (
-    <QuizContext.Provider value={{ isQuizOver, toggleIsQuizOver }}>
+    <QuizContext.Provider
+      value={{
+        isQuizOver,
+        toggleIsQuizOver,
+        quizResult,
+      }}
+    >
       {children}
     </QuizContext.Provider>
   );

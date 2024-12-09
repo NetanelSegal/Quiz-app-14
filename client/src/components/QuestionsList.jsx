@@ -7,14 +7,15 @@ import { useQuizContext } from '../contexts/QuizContextProvider';
 
 export default function QuestionsList({ selectedCategory = '' }) {
   const url = `http://localhost:3000/questions?cat=${selectedCategory}`;
-
   const {
     data: questions,
     isLoading,
     error,
   } = useAxiosGet({ url, initialValue: [] });
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const { toggleIsQuizOver } = useQuizContext();
+  
   const incrementQuestion = () => {
     if (currentQuestionIndex === questions.length - 1) {
       toggleIsQuizOver();
