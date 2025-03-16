@@ -1,13 +1,32 @@
 import { createContext, useContext, useRef, useState } from 'react';
-
+import useLocalStorage from '../hooks/useLocalStorage';
+import useCurrentQuizResult from '../hooks/useCurrentQuizResult';
 const QuizContext = createContext();
 
 export default function QuizContextProvider({ children }) {
+  const { storageData: quizResultRecords, updateStorageData: updateRecords } =
+    useLocalStorage({ key: 'quizResultRecords', initialValue: [] });
   const [isQuizOver, setIsQuizOver] = useState(false);
-  const quizResult = useRef([]);
+
+  const {
+    addQuestionRecordToQuizResult,
+    addSelectedCategoryToQuizResult,
+    currentQuizResultData,
+    resetCurrentQuizResult,
+  } = useCurrentQuizResult();
+
+  const addQuizResultToLastQuizList = () => {
+    updateRecords([...quizResultRecords, currentQuizResultData.current]);
+  };
 
   const toggleIsQuizOver = () => {
     setIsQuizOver((prev) => !prev);
+    addQuizResultToLastQuizList(currentQuizResultData.current);
+  };
+
+  const restartQuiz = () => {
+    setIsQuizOver(false);
+    resetCurrentQuizResult();
   };
 
   return (
@@ -15,7 +34,11 @@ export default function QuizContextProvider({ children }) {
       value={{
         isQuizOver,
         toggleIsQuizOver,
-        quizResult,
+        currentQuizResultData,
+        restartQuiz,
+        quizResultRecords,
+        addQuestionRecordToQuizResult,
+        addSelectedCategoryToQuizResult,
       }}
     >
       {children}

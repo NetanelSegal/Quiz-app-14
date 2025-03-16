@@ -2,20 +2,23 @@ import { useState } from 'react';
 import { useQuizContext } from '../contexts/QuizContextProvider';
 
 export default function Question({ question, incrementQuestion }) {
-  const { quizResult } = useQuizContext();
+  const { addQuestionRecordToQuizResult } = useQuizContext();
   const [selectedAnswer, setSelectedAnser] = useState(-1);
 
   const handleClick = (index) => {
     setSelectedAnser(index);
-    quizResult.current.push({ ...question, selectedAnswer: index });
+    addQuestionRecordToQuizResult({
+      ...question,
+      selectedAnswer: index,
+    });
   };
 
   return (
-    <div className="py-2">
-      <h3 className="text-2xl min-h-24">{question.question}</h3>
-      <ul className="my-4 flex flex-col gap-2">
+    <div className='py-2'>
+      <h3 className='text-2xl min-h-24'>{question.question}</h3>
+      <ul className='my-4 flex flex-col gap-2'>
         {question.options.map((option, i) => (
-          <li key={i} className="h-20">
+          <li key={i} className='h-20'>
             <button
               disabled={selectedAnswer !== -1}
               onClick={() => handleClick(i)}
@@ -29,8 +32,8 @@ export default function Question({ question, incrementQuestion }) {
       </ul>
       <button
         disabled={selectedAnswer === -1}
-        className="disabled:bg-gray-400 disabled:text-white disabled:hover:scale-100 
-        disabled:hover:cursor-not-allowed cursor-pointer w-full hover:scale-105 active:scale-95 p-4 bg-blue-200 text-black rounded-xl"
+        className='disabled:bg-gray-400 disabled:text-white disabled:hover:scale-100 
+        disabled:hover:cursor-not-allowed cursor-pointer w-full hover:scale-105 active:scale-95 p-4 bg-blue-200 text-black rounded-xl'
         onClick={incrementQuestion}
       >
         Next

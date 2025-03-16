@@ -3,10 +3,10 @@
     "category": "mongo",
     "question": "Which of the following is correct about MongoDB?",
     "options": [
-      "It’s a NoSQL database that uses collections and documents.",
-      "It’s a SQL-based relational database.",
+      "It's a NoSQL database that uses collections and documents.",
+      "It's a SQL-based relational database.",
       "It only supports schema-based data.",
-      "It doesn’t support indexing."
+      "It doesn't support indexing."
     ],
     "answer": 0
   },
@@ -259,7 +259,7 @@
   },
   {
     "category": "react",
-    "question": "What’s the default port for a React application?",
+    "question": "What's the default port for a React application?",
     "options": ["3000", "8080", "4000", "9000"],
     "answer": 0
   },
